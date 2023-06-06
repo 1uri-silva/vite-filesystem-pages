@@ -1,0 +1,49 @@
+{
+  "name": "vite-filesystem-pages",
+  "version": "1.0.0",
+  "description": "An plugin vite to render routes pages based filesystem paths.",
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest",
+    "dev": "npm run build -- --watch --ignore-watch examples"
+  },
+  "dependencies": {
+    "vite": "^4.3.9",
+    "fast-glob": "^3.2.12"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.5",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4",
+    "vitest": "^0.31.4"
+  },
+  "keywords": [
+    "vite",
+    "react",
+    "react-router",
+    "file-system-based",
+    "routing"
+  ],
+  "author": "Iuri Rodrigues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/1uri-silva/vite-filesystem-pages"
+  },
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/1uri-silva/vite-filesystem-pages",
+  "bugs": "https://github.com/1uri-silva/vite-filesystem-pages/issues"
+}
