@@ -1,27 +1,20 @@
 import process from 'process';
-import { root_src_page } from './utils';
+import virtual from '@rollup/plugin-virtual';
 
 import type { Plugin } from 'vite';
-import { Options, UserOptions } from './types';
 import { makeModule } from './stringify';
 
 const MODULE_NAME = ' virtual:vite-filesystem-pages';
 
-function createPlugin(userOptions: UserOptions = {}): Plugin {
-	const options: Options = {
-		root: process.cwd(),
-		pageDir: root_src_page,
-		...userOptions,
-	};
+const rollupInputOptions = {
+	plugins: [virtual({ 'vite-filesystem-pages': makeModule(process.cwd()) })],
+};
 
+function createPlugin(): Plugin {
 	return {
-		name: 'page-filesystem',
+		name: 'vite-filesystem-pages',
 		enforce: 'pre',
 		apply: 'build',
-		configResolved(config) {
-			options.root = config.root;
-		},
-
 		resolveId(source) {
 			if (source === MODULE_NAME) {
 				return source;
@@ -37,5 +30,5 @@ function createPlugin(userOptions: UserOptions = {}): Plugin {
 	};
 }
 
-export type * from './types';
+export { rollupInputOptions };
 export default createPlugin;

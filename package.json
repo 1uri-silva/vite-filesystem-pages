@@ -8,8 +8,9 @@
     "dev": "npm run build -- --watch --ignore-watch examples"
   },
   "dependencies": {
-    "vite": "^4.3.9",
-    "fast-glob": "^3.2.12"
+    "@rollup/plugin-virtual": "^3.0.1",
+    "fast-glob": "^3.2.12",
+    "vite": "^4.3.9"
   },
   "devDependencies": {
     "@types/node": "^20.2.5",

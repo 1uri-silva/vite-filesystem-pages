@@ -1,7 +1,4 @@
-import { readdirSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
-
-import { ReactRouteBase } from './types';
+import { readdirSync } from 'node:fs';
 
 function stringifyRoute(dir: string) {
 	let routes = [];
@@ -25,35 +22,31 @@ function stringifyRoute(dir: string) {
 		const layout = fileLayout ? fileLayout[0] : '';
 		const page = filePage ? filePage[0] : '';
 
-		const object = {
+		const objectRoute = {
 			layout,
 			page,
 			name: name.split('.')[0],
-			importPath: join(dir, page ? page : layout),
+			importPath: dir,
 		};
-		const router: ReactRouteBase[] = [];
 
-		if (
-			!directories.includes(object.name) ||
-			!existsSync(join(dir, object.name, 'index.tsx'))
-		) {
-			router.push({
-				path: object.name,
-			});
+		const router = [];
 
-			if (!!object.layout) {
-				router.push({ element: object.layout });
-			}
-			router.push({
-				children: [
-					{
-						path: '/',
-						element: `import('/${object.importPath}')`,
-					},
-				],
-			});
-			routes.push(`{${router.join(', ')}}`);
-		}
+		router.push(`path: '${objectRoute.name}'`);
+		router.push(
+			`element: ${
+				objectRoute.layout
+					? `() => import('${objectRoute.importPath}/${objectRoute.layout}')`
+					: undefined
+			}`
+		);
+		router.push(
+			`children: [{ path: '/', element: ${
+				objectRoute.page
+					? `() => import('${objectRoute.importPath}/${objectRoute.page}')`
+					: undefined
+			} }]`
+		);
+		routes.push(`{ ${router.join(', ')} }`);
 	}
 	return { routes };
 }
