@@ -1,5 +1,5 @@
 {
-  "name": "vite-filesystem-pages",
+  "name": "vite-plugin-filesystem-pages",
   "version": "1.0.0",
   "description": "An plugin vite to render routes pages based filesystem paths.",
   "scripts": {
@@ -10,6 +10,7 @@
   "dependencies": {
     "@rollup/plugin-virtual": "^3.0.1",
     "fast-glob": "^3.2.12",
+    "rollup": "^3.24.0",
     "vite": "^4.3.9"
   },
   "devDependencies": {
